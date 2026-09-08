@@ -59,14 +59,15 @@ jobs:
   deployment:
     runs-on: ubuntu-latest
     needs: build
+    environment: PROD
     steps:
       - name: print build job variable
         run: |
           echo "value of build job varialbe: ${{needs.build.outputs.job_pass_variable}}"
       - name: print_enviornment_secrets_and_variables
         run: |
-          echo "environment secrets=${{secrets.}}"
-          echo "environment variable=${{vars.}}"
+          echo "environment secrets=${{secrets.PROD_SECRET}}"
+          echo "environment variable=${{vars.PROD_VAR}}"
   on_completion:
     needs: deployment
     runs-on: ubuntu_latest
