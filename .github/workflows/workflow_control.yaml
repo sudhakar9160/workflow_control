@@ -73,4 +73,4 @@ jobs:
     if: failure()
     steps:
       - name: error_message
-        run: echo "something went wrong.."
+        run: echo "something went wrong..."
