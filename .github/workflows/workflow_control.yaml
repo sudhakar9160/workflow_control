@@ -17,7 +17,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: components
-          run: echo ${{hashFiles('**/package-lock.json')}}
+          key: echo ${{hashFiles('**/package-lock.json')}}
       - name: run_lint
         run: npm run lint
   test:
