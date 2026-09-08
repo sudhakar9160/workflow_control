@@ -71,7 +71,7 @@ jobs:
           echo "environment secrets=${{secrets.PROD_SECRET}}"
           echo "environment variable=${{vars.PROD_VAR}}"
   on_completion:
-    needs: deployment
+    needs: [test, lint]
     runs-on: ubuntu_latest
     if: failure()
     steps:
