@@ -12,9 +12,18 @@ on:
         default: ubuntu-latest
         required: false
         type: string
+    outputs:
+      return_message:
+        description: Return_message
+        value: ${{job.deploy.outputs.my_outpt}}
 jobs:
   deploy:
     runs-on: ${{inputs.os}}
+    outputs:
+      my_outpt: ${{steps.return_message.outputs.message}}
     steps:
       - name: normal_print
         run: echo "${{inputs.your_message}}"
+      - name: return_message
+        id: return_message
+        run: echo 'message=hi ${{inputs.os}}' >> $GITHUB_OUTPUT

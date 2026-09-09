@@ -116,6 +116,12 @@ jobs:
     with:
       your_message: Hello World
       os: ubuntu-latest
+  print_reusable_outputs:
+    needs: re_usable_code
+    runs-on: ubuntu-latest
+    steps:
+      - name: print_re-usable_variable
+        run: echo "variable returned:${{needs.re_usable_code.outputs.return_message}}"
 
 
 
