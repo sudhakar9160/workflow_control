@@ -9,7 +9,7 @@ jobs:
           - 10
           - 14
           - 16
-        meachines: [ubuntu-latest, mac-latest]
+        meachines: [ubuntu-latest, macos-26]
     runs-on: ${{matrix.meachines}}
     steps: 
       - name: get_code
