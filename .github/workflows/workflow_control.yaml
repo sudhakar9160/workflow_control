@@ -17,7 +17,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: components
-          key: echo ${{hashFiles('**/package-lock.json')}}
+          key: ${{hashFiles('**/package-lock.json')}}
       - name: run_lint
         run: npm run lint
   test:
@@ -29,7 +29,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: componets
-          key: echo ${{hashFiles('**/package-lock.json')}}
+          key: ${{hashFiles('**/package-lock.json')}}
       - name: run_test
         id: TEST
         run: npm run test
