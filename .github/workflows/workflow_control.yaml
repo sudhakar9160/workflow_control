@@ -54,6 +54,8 @@ jobs:
     steps:
       - name: get_code
         uses: actions/checkout@v4
+      - name: add_dependencies
+        run: npm ci
       - name: build_application
         run: npm run build
       - name: job_pass_variable_assignment
