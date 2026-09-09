@@ -52,6 +52,8 @@ jobs:
     env:
       BUILD_VAR: 'build_var'
     steps:
+      - name: get_code
+        uses: actions/checkout@v4
       - name: build_application
         run: npm run build
       - name: job_pass_variable_assignment
