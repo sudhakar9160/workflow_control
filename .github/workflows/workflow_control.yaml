@@ -101,10 +101,15 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-26]
+        node_version: [10,14,15]
+        include:
+          - os: macos-15
+        exclude:
+          - node_version: 10 
     runs-on: ${{matrix.os}}
     steps:
       - name: print_message
-        run: echo "ran-on:${{matrix.os}}"
+        run: echo "ran-on:${{matrix.os}} and node_version:${{node_version}}"
 
 
 
