@@ -63,10 +63,15 @@ jobs:
         run: npm ci
       - name: install_build
         run: npm run build
+      - name: upload_build_artifacts
+        uses: actions/artifact-upload@v4
+        with:
+          name: dist
+          path: dist
       - name: download_artifacts
         uses: actions/download-artifact@v4
         with:
-          name: ${{env.artifact_folder}}
+          name: dist
       - name: set_build_variable
         id: build_output
         run: echo 'my_value=build_variable'>> $GITHUB_OUTPUT
