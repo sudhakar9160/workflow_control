@@ -113,6 +113,9 @@ jobs:
   re_usable_code:
     needs: run_couple_of_times
     uses: ./.github/workflows/template.yaml
+    with:
+      your_message: Hello World
+      os: macos-26
 
 
 

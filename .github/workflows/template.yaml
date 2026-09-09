@@ -1,10 +1,20 @@
 name: workflow_template
 on:
-  workflow_call
-
+  workflow_call:
+    inputs:
+      your_message:
+        description: Enter your message
+        default: Hello
+        required: false
+        type: string
+      os:
+        description: specify meachine to run
+        default: ubuntu-latest
+        required: false
+        type: string
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: ${{inputs.os}}
     steps:
       - name: normal_print
-        run: echo "build and deployment"
+        run: echo "${{inputs.your_message}}"
