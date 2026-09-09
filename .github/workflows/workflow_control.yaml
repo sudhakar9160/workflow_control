@@ -115,7 +115,7 @@ jobs:
     uses: ./.github/workflows/template.yaml
     with:
       your_message: Hello World
-      os: macos-26
+      os: ubuntu-latest
 
 
 
