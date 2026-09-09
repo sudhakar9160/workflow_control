@@ -18,6 +18,8 @@ jobs:
         with:
           path: components
           key: ${{hashFiles('**/package-lock.json')}}
+      - name: run_dependencis
+        run: npm cil
       - name: run_lint
         run: npm run lint
   test:
@@ -28,8 +30,10 @@ jobs:
       - name: cache
         uses: actions/cache@v4
         with:
-          path: componets
+          path: components
           key: ${{hashFiles('**/package-lock.json')}}
+      - name: install dependies
+        run: npm ci
       - name: run_test
         id: TEST
         run: npm run test
@@ -72,7 +76,7 @@ jobs:
           echo "environment variable=${{vars.PROD_VAR}}"
   on_completion:
     needs: [test, lint]
-    runs-on: ubuntu_latest
+    runs-on: ubuntu-latest
     if: failure()
     steps:
       - name: error_message
