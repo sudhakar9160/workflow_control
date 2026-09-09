@@ -15,7 +15,7 @@ on:
     outputs:
       return_message:
         description: Return_message
-        value: ${{job.deploy.outputs.my_outpt}}
+        value: ${{jobs.deploy.outputs.my_outpt}}
 jobs:
   deploy:
     runs-on: ${{inputs.os}}
