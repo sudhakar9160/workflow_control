@@ -110,8 +110,9 @@ jobs:
     steps:
       - name: print_message
         run: echo "ran-on:${{matrix.os}} and node_version:${{matrix.node_version}}"
-      - name: call_template
-        uses: ./.github/workflows/template.yaml
+  re_usable_code:
+    needs: run_couple_of_times
+    uses: ./.github/workflows/template.yaml
 
 
 
