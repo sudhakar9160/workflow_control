@@ -1,0 +1,107 @@
+name: workflow_control
+on: push
+
+## declaring global variables:
+env:
+  artifact_folder: dbt_folder
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: lint_get_code
+        uses: actions/checkout@v4
+      - name: install_npm_node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: cache_install
+        uses: actions/cache@v4
+        with:
+          name: cache_install
+          path: cache_install_${{hashFiles('**/package-lock.json')}}
+      - name: install_dependies
+        run: npm ci
+      - name: run_lint
+        run: npm run lint
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: test_get_code
+        uses: actions/checkout@v4
+      - name: cache_install
+        uses: actions/cache@v4
+        with:
+          name: cache_install
+          key: cache_install_${{hashFiles('**/package-lock.json')}}
+      - name: add_dependencis
+        run: npm ci
+      - name: run_test
+        id: run_test
+        run: npm run test
+      - name: upload_test_artifacts
+        if: failure() && steps.run_test.outcome=='failure'
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{env.artifact_folder}}
+          path: ${{env.artifact_folder}}
+  build:
+    needs:
+      - test
+      - lint
+    runs-on: ubuntu-latest
+    outputs:
+      build_output: ${{steps.build_output.outputs.my_value}}
+    steps:
+      - name: get_code
+        uses: actions/checkout@v4
+      - name: install_cache
+        uses: actions/cache@v4
+        with:
+          name: install_cache
+          key: install_cache_${{hasFiles('**/package-lock.json')}}
+      - name: install_dependies
+        run: npm ci
+      - name: install_build
+        run: npm run build
+      - name: download_artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{env.artifact_folder}}
+      - name: set_build_variable
+        id: build_output
+        run: echo 'my_value=build_variable'>> $GITHUB_OUTPUT
+  deployment:
+    environment: TEST
+    runs-on: ubuntu-latest
+    needs:
+      - build
+    steps:
+      - name: print_build_variables
+        run: echo "build_variable=${{needs.build.outputs.build_output}}"
+      - name: print_enviornment_secrets_and_variables
+        run:  |
+          echo "environment_secret=${{secrets.PROD_SECRET}}"
+          echo "environment_variable=${{vars.PROD_VAr}}"
+  on_failure:
+    runs-on: ubuntu-latest
+    needs:
+      - lint
+      - test
+    if: failure()
+    steps:
+      - name: on_failure
+        run: echo "Someting went wrong.. "
+  run_couple_of_times:
+    needs: deployment
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-26]
+    runs-on: ${{matrix.os}}
+    steps:
+      - name: print_message
+        run: echo "ran-on:${{matrix.os}}"
+
+
+
+
+      
