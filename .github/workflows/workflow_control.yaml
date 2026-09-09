@@ -38,7 +38,7 @@ jobs:
         id: TEST
         run: npm run test
       - name: upload_artifacts
-        if: failure() && steps.TEST.outcome=='failure'
+        continue-on-error: true
         uses: actions/upload-artifact@v4
         with:
           name: test_results
