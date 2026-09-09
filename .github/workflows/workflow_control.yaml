@@ -17,8 +17,8 @@ jobs:
       - name: cache_install
         uses: actions/cache@v4
         with:
-          name: cache_install
-          path: cache_install_${{hashFiles('**/package-lock.json')}}
+          path: cache_install
+          key: cache_install_${{hashFiles('**/package-lock.json')}}
       - name: install_dependies
         run: npm ci
       - name: run_lint
@@ -31,7 +31,7 @@ jobs:
       - name: cache_install
         uses: actions/cache@v4
         with:
-          name: cache_install
+          path: cache_install
           key: cache_install_${{hashFiles('**/package-lock.json')}}
       - name: add_dependencis
         run: npm ci
@@ -57,7 +57,7 @@ jobs:
       - name: install_cache
         uses: actions/cache@v4
         with:
-          name: install_cache
+          path: install_cache
           key: install_cache_${{hashFiles('**/package-lock.json')}}
       - name: install_dependies
         run: npm ci
