@@ -19,7 +19,7 @@ jobs:
           path: components
           key: ${{hashFiles('**/package-lock.json')}}
       - name: run_dependencis
-        run: npm cil
+        run: npm ci
       - name: run_lint
         run: npm run lint
   test:
