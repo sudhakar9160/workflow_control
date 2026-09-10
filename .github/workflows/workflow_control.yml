@@ -16,7 +16,7 @@ jobs:
         uses: actions/checkout@v4
       - name: cache and install dependenices
         uses: ./.github/actions/
-      - name: run lint
+      - name: running_lint
         uses: npm run lint
   test:
     runs-on: ubuntu-latest
@@ -25,7 +25,7 @@ jobs:
         uses: actions/checkout@v4
       - name: cache and install dependenices
         uses: ./.github/actions/
-      - name: run test
+      - name: running_test
         uses: npm run test
       - name: upload_artifacts
         uses: actions/upload-artifact@v4
