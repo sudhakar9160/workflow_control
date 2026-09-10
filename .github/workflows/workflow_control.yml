@@ -1,0 +1,17 @@
+name: workflow_control
+on: 
+  push:
+    branches:
+      - main
+      - 'feature*'
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: code_download
+        uses: actions/checkout@v4
+      - name: list_files
+        run: ls
+        shell: bash
+    
+    
