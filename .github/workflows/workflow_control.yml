@@ -17,7 +17,7 @@ jobs:
       - name: cache and install dependenices
         uses: ./.github/actions/
       - name: running_lint
-        uses: npm run lint
+        run: npm run lint
   test:
     runs-on: ubuntu-latest
     steps:
@@ -26,7 +26,7 @@ jobs:
       - name: cache and install dependenices
         uses: ./.github/actions/
       - name: running_test
-        uses: npm run test
+        run: npm run test
       - name: upload_artifacts
         uses: actions/upload-artifact@v4
         with:
