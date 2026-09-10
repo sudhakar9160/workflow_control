@@ -1,0 +1,27 @@
+name: re-usabulity_code
+on: 
+  workflow_call:
+    inputs:
+      os:
+        description: enter your input description
+        type: string
+    outputs:
+      my_output:
+        description: This is my output
+        value: ${{jobs.my_job.my_output}}
+
+jobs: 
+  my_job:
+    runs-on: ${{inputs.os}}
+    outputs:
+      my_output: ${{steps.output_va.outputs.output_val}}
+    steps:
+      - name: greetings
+        run: hi ${{inputs.os}}
+      - name: output_val
+        id: oupput_val
+        run: echo 'out_val=${{inputs.os}}' >> $GITHUB_OUTPUT
+
+
+
+    
