@@ -13,5 +13,7 @@ jobs:
       - name: list_files
         run: ls
         shell: bash
-    
+      - name: go_into_workflowfolders
+        run: cd .github
+        shell: bash
     
