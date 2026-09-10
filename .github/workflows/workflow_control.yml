@@ -15,7 +15,7 @@ jobs:
         shell: bash
       - name: go_into_workflowfolders_list_files
         run: |
-          echo cd .github
-          echo ls
+           cd .github
+           ls
         shell: bash
     
