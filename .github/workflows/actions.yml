@@ -12,8 +12,9 @@ runs:
       uses: actions/cache@v4
       with:
         path: ~/.npm
-        key: my_cache_${{hashFiles('**/package-lock.json')}}
+        key: my_cache_${{ hashFiles('**/package-lock.json') }}
     - name: install depndencies
-      if: steps.cached.ouputs.cache-hit !='true'
+      if: steps.cached.outputs.cache-hit !='true'
       run: npm ci
+      shell: bash
 
