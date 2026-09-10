@@ -15,7 +15,7 @@ jobs:
       - name: download_code
         uses: actions/checkout@v4
       - name: cache and install dependenices
-        uses: .
+        uses: ./.github/actions/
       - name: run lint
         uses: npm run lint
   test:
@@ -24,7 +24,7 @@ jobs:
       - name: download_code
         uses: actions/checkout@v4
       - name: cache and install dependenices
-        uses: .
+        uses: ./.github/actions/
       - name: run test
         uses: npm run test
       - name: upload_artifacts
