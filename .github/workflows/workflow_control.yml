@@ -38,6 +38,8 @@ jobs:
         uses: ./.github/actions/
       - name: npm_run_build
         run: npm run build 
+      - name: list_see
+        run: ls
       - name: upload_artifacts
         uses: actions/upload-artifact@v4
         with:
