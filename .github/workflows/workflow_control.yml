@@ -65,7 +65,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: calling_reusable_workflow
-        uses: ./reusable_job.yml
+        uses: ./.github/workflows/reusable_job.yml
         with:
           os: '["ubuntu-latest", "macos-26", "mac-latest"]'
   output_of_multiple_meachine_re_usable_code:
