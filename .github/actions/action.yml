@@ -9,6 +9,6 @@ runs:
         path: ~/.npm
         key: npm_cache_${{ hashFiles('**/package-lock.json') }}
     - name: install_depndencis
-      if: steps.cache.outputs.cache-hit !='true'
+      # if: steps.cache.outputs.cache-hit !='true'
       run: npm ci
       shell: bash
