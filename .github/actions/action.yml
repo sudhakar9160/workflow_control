@@ -7,7 +7,7 @@ runs:
       uses: actions/cache@v4
       with: 
         path: ~/.npm
-        key: npm_cache_${{ hasFiles('**/package-lock.json') }}
+        key: npm_cache_${{ hashFiles('**/package-lock.json') }}
     - name: install_depndencis
       if: steps.cache.outputs.cache-hit !='true'
       run: npm ci
