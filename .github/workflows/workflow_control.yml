@@ -43,8 +43,8 @@ jobs:
       - name: upload_artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: dab_folder
-          path: dab
+          name: dist_folder
+          path: dist
       - name: set_parameters_build
         id: parameter
         run: echo 'my_var=${{ env.env_par }}' >> $GITHUB_OUTPUT
@@ -55,7 +55,7 @@ jobs:
       - name: download_artifact
         uses: actions/download-artifact@v4
         with:
-          name: dab_folder
+          name: dist_folder
       - name: list_folders_files
         run: ls
       - name: print_build_variable
