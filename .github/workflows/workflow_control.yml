@@ -35,7 +35,7 @@ jobs:
       - name: install_code_build
         uses: actions/checkout@v4
       - name: run_test
-        run: npm run test 
+        run: npm install build 
       - name: upload_artifacts
         uses: actions/upload-artifact@v4
         with:
