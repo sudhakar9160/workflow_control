@@ -34,8 +34,10 @@ jobs:
     steps:
       - name: install_code_build
         uses: actions/checkout@v4
-      - name: run_test
-        run: npm install build 
+      - name: run_re_usabuiluty_build
+        uses: ./.github/actions/
+      - name: npm_run_build
+        run: npm run build 
       - name: upload_artifacts
         uses: actions/upload-artifact@v4
         with:
