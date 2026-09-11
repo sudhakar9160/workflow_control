@@ -14,7 +14,7 @@ jobs:
       - name: install_code_lint
         uses: actions/checkout@v4
       - name: run_re-usabulity_code
-        uses: ../.actions/
+        uses: ./actions/
       - name: run_lint
         run: npm run lint
   test:
@@ -23,7 +23,7 @@ jobs:
       - name: install_code_test
         uses: actions/checkout@v4
       - name: run_re-usabulity_code
-        uses: ../.actions/
+        uses: ./actions/
       - name: run_test
         run: npm run test
   build:
