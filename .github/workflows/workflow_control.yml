@@ -1,0 +1,71 @@
+name: work_control
+on: 
+  push:
+    branches:
+      - main
+      - 'feat*'
+##set global parameters
+env:
+  env_par: Sudhakar_PROD
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: install_code_lint
+        uses: actions/checkout@v4
+      - name: run_re-usabulity_code
+        uses: ./.actions/
+      - name: run_lint
+        run: npm run lint
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: install_code_test
+        uses: actions/checkout@v4
+      - name: run_re-usabulity_code
+        uses: ./.actions/
+      - name: run_test
+        run: npm run test
+  build:
+    needs: [test, lint]
+    runs-on: ubuntu-latest
+    outputs:
+      my_output: ${{steps.parameter.outputs.my_var}}
+    steps:
+      - name: install_code_build
+        uses: actions/checkout@v4
+      - name: build_npm
+        run: npm run build
+      - name: upload_artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: dab_folder
+          path: dab
+      - name: set_parameters_build
+        id: parameter
+        run: echo ${{my_var=env.env_par}} >> $GITHUB_OUTPUT
+  deployment:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: download_artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: dab_folder
+      - name: list_folders_files
+        run: ls
+      - name: print_build_variable
+        run: echo build_value=${{needs.build.outputs.my_output}}
+  multiple_meachine_re_usable_code:
+    runs-on: ubuntu-latest
+    steps:
+      - name: calling_reusable_workflow
+        uses: ./.github/workflows/reusable_job.yml
+        with:
+          os: '["ubuntu-latest", "macos-26", "mac-latest"]'
+  output_of_multiple_meachine_re_usable_code:
+    runs-on: ubuntu-latest
+    needs: multiple_meachine_re_usable_code
+    steps:
+      - name: capture_variable
+        run: echo "value was ${{ needs.multiple_meachine_re_usable_code.outpus.my_output}}"
