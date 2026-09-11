@@ -57,6 +57,7 @@ jobs:
       - name: print_build_variable
         run: echo build_value=${{needs.build.outputs.my_output}}
   multiple_meachine_re_usable_code:
+    needs: deployment
     runs-on: ubuntu-latest
     steps:
       - name: calling_reusable_workflow
