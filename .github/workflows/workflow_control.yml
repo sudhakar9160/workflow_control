@@ -45,7 +45,7 @@ jobs:
         id: parameter
         run: echo 'my_var=${{ env.env_par }}' >> $GITHUB_OUTPUT
   deployment:
-    needs: build
+    needs: build 
     runs-on: ubuntu-latest
     steps:
       - name: download_artifact
