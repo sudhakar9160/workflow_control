@@ -43,7 +43,7 @@ jobs:
           path: dab
       - name: set_parameters_build
         id: parameter
-        run: echo ${{my_var=env.env_par}} >> $GITHUB_OUTPUT
+        run: echo 'my_var=${{ env.env_par }}' >> $GITHUB_OUTPUT
   deployment:
     needs: build
     runs-on: ubuntu-latest

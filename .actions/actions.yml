@@ -11,3 +11,4 @@ runs:
     - name: install_depndencis
       if: steps.cache.outputs.cache-hit !='true'
       run: npm ci
+      shell: bash
